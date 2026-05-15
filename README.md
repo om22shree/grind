@@ -9,6 +9,13 @@ Required material for job-switch grind
   - `dsa/heaps/`: top-k, merge-k, scheduling, running median
   - `dsa/linkedlists/`: pointer basics, merge/reorder patterns, LRU cache
   - `dsa/trees/`: traversals, BST, DFS properties, serialization, trie/prefix lookup
+- Cross-cutting pattern files:
+  - `dsa/sliding_window.py`: fixed window, variable window, deque maximum, anagram windows
+  - `dsa/binary_search.py`: classic search, `bisect`, rotated search, search-on-answer
+  - `dsa/intervals.py`: merge, insert, overlaps, meeting rooms, intersections
+  - `dsa/heaps.py`: compact heap rehearsal sheet for top-k, merge-k, scheduling, median
+  - `dsa/dp_lite.py`: memoization and small 1D DP patterns
+  - `dsa/rate_limiter.py`: sliding-window log, token bucket, fixed window, health-check window
 
 The goal is not to memorize long files. Open the folder that matches the pattern, rewrite the small
 template from memory, then connect it to an SRE/DevOps analogy: dependency graph, scheduler,
