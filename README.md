@@ -4,6 +4,15 @@ Required material for job-switch grind
 ## Focus on relevant material for DSA interviews
 - Important Python3 imports
 - Standard algo implementations which can be modified on-the-fly
+- Recall-oriented pattern folders:
+  - `dsa/graphs/`: traversal, topo sort, union-find, Dijkstra, matrix BFS, word ladder, bounded Bellman-Ford
+  - `dsa/heaps/`: top-k, merge-k, scheduling, running median
+  - `dsa/linkedlists/`: pointer basics, merge/reorder patterns, LRU cache
+  - `dsa/trees/`: traversals, BST, DFS properties, serialization, trie/prefix lookup
+
+The goal is not to memorize long files. Open the folder that matches the pattern, rewrite the small
+template from memory, then connect it to an SRE/DevOps analogy: dependency graph, scheduler,
+cache, service discovery prefix, health-check window, or merged log stream.
 
 ## Focus on relevant System design conecpts
 - Rate limiter -- token bucket
