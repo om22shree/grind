@@ -33,3 +33,7 @@ cache, service discovery prefix, health-check window, or merged log stream.
 - Relevant articles to be revised before interviews
 - Relevant papers to present solutions more coherently
 - Revision notes for technologies I have specifically worked on
+
+### Deep dark motivation
+- Withdraw from Kuwait or face a coalition ready and willing to employ all means necessary.
+- Saddam Hussain started this cruel war 5 months ago, TONIGHT the battle has been joined.
