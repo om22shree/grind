@@ -11,6 +11,7 @@ Required material for job-switch grind
   - `dsa/trees/`: traversals, BST, DFS properties, serialization, trie/prefix lookup
 - Cross-cutting pattern files:
   - `dsa/sliding_window.py`: fixed window, variable window, deque maximum, anagram windows
+  - `dsa/two_pointers.py`: sorted two-sum, 3Sum, container water, in-place array cleanup
   - `dsa/binary_search.py`: classic search, `bisect`, rotated search, search-on-answer
   - `dsa/intervals.py`: merge, insert, overlaps, meeting rooms, intersections
   - `dsa/heaps.py`: compact heap rehearsal sheet for top-k, merge-k, scheduling, median
