@@ -5,6 +5,10 @@ from typing import Dict, List, Tuple
 Graph = Dict[int, List[int]]
 
 
+# Pattern: adjacency-list construction.
+# Invariant: every edge is represented once for directed graphs, twice for undirected graphs.
+# Complexity: O(E) time, O(V + E) space.
+# Interview line: defaultdict(list) keeps graph construction concise and avoids missing-key checks.
 def build_graph(edges: List[Tuple[int, int]], directed: bool = False) -> Graph:
     graph = defaultdict(list)
     for a, b in edges:
@@ -14,6 +18,10 @@ def build_graph(edges: List[Tuple[int, int]], directed: bool = False) -> Graph:
     return graph
 
 
+# Pattern: BFS with a queue.
+# Invariant: seen contains every node already enqueued, so nodes are processed once.
+# Complexity: O(V + E) time, O(V) space.
+# Interview line: deque gives O(1) popleft for level-by-level or shortest-hop traversal.
 def bfs_order(graph: Graph, start: int) -> List[int]:
     seen = {start}
     q = deque([start])
@@ -30,10 +38,18 @@ def bfs_order(graph: Graph, start: int) -> List[int]:
     return order
 
 
+# Pattern: recursive DFS.
+# Invariant: seen prevents revisiting nodes and recursion explores one path fully.
+# Complexity: O(V + E) time, O(V) space for recursion/seen.
+# Interview line: DFS is natural when you need reachability, components, or backtracking.
 def dfs_order(graph: Graph, start: int) -> List[int]:
     seen = set()
     order = []
 
+    # Pattern: recursive visit helper.
+    # Invariant: node is marked seen before any neighbor recursion.
+    # Complexity: O(outdegree(node)) local work, O(V) recursion space overall.
+    # Interview line: mark before recursing to avoid cycles re-entering the same node.
     def dfs(node: int) -> None:
         seen.add(node)
         order.append(node)
@@ -45,6 +61,10 @@ def dfs_order(graph: Graph, start: int) -> List[int]:
     return order
 
 
+# Pattern: grid BFS flood fill.
+# Invariant: once land is queued, mark it water so it is not counted again.
+# Complexity: O(rows * cols) time, O(rows * cols) worst-case space.
+# Interview line: every time we discover unvisited land, that starts one island traversal.
 def num_islands(grid: List[List[str]]) -> int:
     if not grid or not grid[0]:
         return 0
@@ -71,6 +91,10 @@ def num_islands(grid: List[List[str]]) -> int:
     return islands
 
 
+# Pattern: recursive grid DFS flood fill.
+# Invariant: each matching cell is consumed before exploring its four neighbors.
+# Complexity: O(rows * cols) time, O(rows * cols) recursion space worst case.
+# Interview line: mutate visited cells in-place when the prompt allows it.
 def flood_fill_dfs(grid: List[List[str]], r: int, c: int, target: str = "1") -> None:
     if not grid or not grid[0]:
         return

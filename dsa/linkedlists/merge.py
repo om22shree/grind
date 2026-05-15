@@ -4,6 +4,10 @@ from typing import List, Optional
 from .basics import ListNode, reverse_list
 
 
+# Pattern: two sorted lists with dummy tail.
+# Invariant: tail points to the end of the merged sorted prefix.
+# Complexity: O(m + n) time, O(1) extra space.
+# Interview line: repeatedly attach the smaller head and advance that list.
 def merge_two_lists(
     list1: Optional[ListNode], list2: Optional[ListNode]
 ) -> Optional[ListNode]:
@@ -23,6 +27,10 @@ def merge_two_lists(
     return dummy.next
 
 
+# Pattern: k-way merge with min-heap.
+# Invariant: heap stores the current smallest candidate from each list.
+# Complexity: O(n log k) time, O(k) space.
+# Interview line: use index as a tie-breaker so equal values do not compare nodes.
 def merge_k_lists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
     heap = []
     for idx, node in enumerate(lists):
@@ -42,6 +50,10 @@ def merge_k_lists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
     return dummy.next
 
 
+# Pattern: two pointers with an n-node gap.
+# Invariant: fast is n nodes ahead of slow before both move together.
+# Complexity: O(n) time, O(1) extra space.
+# Interview line: a dummy node makes deleting the head node clean.
 def remove_nth_from_end(head: Optional[ListNode], n: int) -> Optional[ListNode]:
     dummy = ListNode(0, head)
     fast = slow = dummy
@@ -57,6 +69,10 @@ def remove_nth_from_end(head: Optional[ListNode], n: int) -> Optional[ListNode]:
     return dummy.next
 
 
+# Pattern: split, reverse second half, then weave.
+# Invariant: first and reversed second halves are alternately connected.
+# Complexity: O(n) time, O(1) extra space.
+# Interview line: find middle, reverse the back half, then merge one node at a time.
 def reorder_list(head: Optional[ListNode]) -> None:
     if not head or not head.next:
         return

@@ -3,15 +3,27 @@ from typing import List, Optional
 from .traversal import TreeNode
 
 
+# Pattern: recursive tree height.
+# Invariant: depth is one plus the larger child depth.
+# Complexity: O(n) time, O(h) recursion space.
+# Interview line: each subtree returns its height to its parent.
 def max_depth(root: Optional[TreeNode]) -> int:
     if not root:
         return 0
     return 1 + max(max_depth(root.left), max_depth(root.right))
 
 
+# Pattern: postorder height with global diameter.
+# Invariant: best diameter through a node is left_height + right_height.
+# Complexity: O(n) time, O(h) recursion space.
+# Interview line: return height upward, update diameter locally at every node.
 def diameter_of_binary_tree(root: Optional[TreeNode]) -> int:
     diameter = 0
 
+    # Pattern: height-returning postorder helper.
+    # Invariant: update diameter before returning this subtree's height.
+    # Complexity: O(size of subtree) local total, O(h) recursion space overall.
+    # Interview line: the longest path through a node uses both child heights.
     def height(node: Optional[TreeNode]) -> int:
         nonlocal diameter
         if not node:
@@ -25,7 +37,15 @@ def diameter_of_binary_tree(root: Optional[TreeNode]) -> int:
     return diameter
 
 
+# Pattern: postorder height with early failure.
+# Invariant: -1 means the subtree is already unbalanced.
+# Complexity: O(n) time, O(h) recursion space.
+# Interview line: compute balance and height in one DFS instead of recomputing heights.
 def is_balanced(root: Optional[TreeNode]) -> bool:
+    # Pattern: height helper with sentinel failure.
+    # Invariant: -1 propagates an unbalanced subtree upward immediately.
+    # Complexity: O(size of subtree) total, O(h) recursion space overall.
+    # Interview line: combine height calculation and balance checking in one pass.
     def height(node: Optional[TreeNode]) -> int:
         if not node:
             return 0
@@ -40,9 +60,17 @@ def is_balanced(root: Optional[TreeNode]) -> bool:
     return height(root) != -1
 
 
+# Pattern: DFS backtracking from root to leaves.
+# Invariant: path contains the current root-to-node path and remaining is updated.
+# Complexity: O(n) time excluding output, O(h) recursion space.
+# Interview line: append before recursion and pop after so sibling paths stay clean.
 def path_sum(root: Optional[TreeNode], target_sum: int) -> List[List[int]]:
     paths = []
 
+    # Pattern: root-to-leaf backtracking helper.
+    # Invariant: path exactly matches the current recursion path.
+    # Complexity: O(size of subtree) excluding output, O(h) recursion space overall.
+    # Interview line: append before child calls and pop after child calls.
     def dfs(node: Optional[TreeNode], remaining: int, path: List[int]) -> None:
         if not node:
             return
@@ -58,9 +86,17 @@ def path_sum(root: Optional[TreeNode], target_sum: int) -> List[List[int]]:
     return paths
 
 
+# Pattern: postorder max-gain DP on a tree.
+# Invariant: returned gain is the best single-branch path extendable to the parent.
+# Complexity: O(n) time, O(h) recursion space.
+# Interview line: update global best with both branches, but return only one branch upward.
 def max_path_sum(root: Optional[TreeNode]) -> int:
     best = float("-inf")
 
+    # Pattern: max extendable gain helper.
+    # Invariant: return one branch upward, but update best with both branches.
+    # Complexity: O(size of subtree) total, O(h) recursion space overall.
+    # Interview line: paths can split at the current node only for the global answer.
     def gain(node: Optional[TreeNode]) -> int:
         nonlocal best
         if not node:

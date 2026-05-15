@@ -3,6 +3,10 @@ import heapq
 from typing import List, Tuple
 
 
+# Pattern: Dijkstra with adjacency list and min-heap.
+# Invariant: the first time a node is popped, its shortest distance is finalized.
+# Complexity: O((V + E) log V) time, O(V + E) space.
+# Interview line: use Dijkstra when edge weights are non-negative and you need shortest paths.
 def network_delay_time(times: List[List[int]], n: int, k: int) -> int:
     graph = defaultdict(list)
     for src, dst, weight in times:
@@ -23,6 +27,10 @@ def network_delay_time(times: List[List[int]], n: int, k: int) -> int:
     return max(dist.values()) if len(dist) == n else -1
 
 
+# Pattern: reusable single-source shortest path.
+# Invariant: dist[node] is the best known cost, and stale heap entries are skipped.
+# Complexity: O((V + E) log V) time, O(V + E) space.
+# Interview line: pushing improved distances is simpler than decrease-key in Python heaps.
 def shortest_path(n: int, edges: List[Tuple[int, int, int]], start: int) -> List[float]:
     graph = defaultdict(list)
     for a, b, weight in edges:

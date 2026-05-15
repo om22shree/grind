@@ -1,6 +1,10 @@
 from typing import List
 
 
+# Pattern: bounded Bellman-Ford over edge count.
+# Invariant: after i rounds, prices uses at most i edges.
+# Complexity: O(k * E) time, O(V) space.
+# Interview line: copy the previous price array so one round only adds one extra flight.
 def cheapest_flight_with_k_stops(
     n: int, flights: List[List[int]], src: int, dst: int, k: int
 ) -> int:

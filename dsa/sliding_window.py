@@ -2,6 +2,10 @@ from collections import deque, defaultdict, Counter
 from typing import Dict, List
 
 
+# Pattern: fixed-size sliding window with rolling sum.
+# Invariant: window always contains exactly k elements after the first k values.
+# Complexity: O(n) time, O(1) extra space.
+# Interview line: subtract the outgoing element and add the incoming one instead of recomputing.
 def max_average_subarray(nums: List[int], k: int) -> float:
     window_sum = sum(nums[:k])
     best = window_sum
@@ -13,6 +17,10 @@ def max_average_subarray(nums: List[int], k: int) -> float:
     return best / k
 
 
+# Pattern: variable sliding window with last-seen index.
+# Invariant: current window has no duplicate characters.
+# Complexity: O(n) time, O(min(n, charset)) space.
+# Interview line: when a duplicate appears inside the window, jump left past its last position.
 def length_of_longest_substring(s: str) -> int:
     seen: Dict[str, int] = {}
     left = 0
@@ -27,6 +35,10 @@ def length_of_longest_substring(s: str) -> int:
     return best
 
 
+# Pattern: variable sliding window with required character counts.
+# Invariant: shrink only while the window satisfies every needed count.
+# Complexity: O(len(s) + len(t)) time, O(len(t)) space.
+# Interview line: expand to become valid, then shrink greedily to find the smallest valid window.
 def min_window_substring(s: str, t: str) -> str:
     if not t:
         return ""
@@ -56,6 +68,10 @@ def min_window_substring(s: str, t: str) -> str:
     return "" if best[0] == float("inf") else s[best[1] : best[2] + 1]
 
 
+# Pattern: monotonic deque for fixed-size window maximum.
+# Invariant: deque stores candidate indices in decreasing value order.
+# Complexity: O(n) time, O(k) space.
+# Interview line: smaller elements behind a larger incoming value can never become the max.
 def sliding_window_maximum(nums: List[int], k: int) -> List[int]:
     q = deque()
     result = []
@@ -73,6 +89,10 @@ def sliding_window_maximum(nums: List[int], k: int) -> List[int]:
     return result
 
 
+# Pattern: fixed-size sliding window with frequency maps.
+# Invariant: window length never exceeds len(p), and matching counts mark an anagram.
+# Complexity: O(n) time with bounded alphabet, O(len(p)) space.
+# Interview line: keep the window exactly the pattern length, then compare character counts.
 def find_anagrams(s: str, p: str) -> List[int]:
     need = Counter(p)
     window = Counter()
@@ -95,6 +115,10 @@ def find_anagrams(s: str, p: str) -> List[int]:
     return result
 
 
+# Pattern: variable sliding window with most frequent character tracking.
+# Invariant: window is valid when replacements needed <= k.
+# Complexity: O(n) time, O(1) space for uppercase English letters.
+# Interview line: the best target character is the most frequent one already in the window.
 def longest_repeating_character_replacement(s: str, k: int) -> int:
     counts = defaultdict(int)
     left = 0

@@ -3,6 +3,10 @@ from typing import List, Optional
 
 
 class TreeNode:
+    # Pattern: binary-tree node container.
+    # Invariant: each node stores a value plus optional left/right children.
+    # Complexity: O(1) time, O(1) space.
+    # Interview line: tree problems are mostly about what each node returns to its parent.
     def __init__(
         self,
         val: int = 0,
@@ -13,10 +17,18 @@ class TreeNode:
         self.left = left
         self.right = right
 
+    # Pattern: debug representation.
+    # Invariant: repr shows only this node value, not the full subtree.
+    # Complexity: O(1) time, O(1) space.
+    # Interview line: avoid recursive repr on trees because it can hide expensive traversal.
     def __repr__(self) -> str:
         return f"TreeNode({self.val})"
 
 
+# Pattern: level-order tree construction.
+# Invariant: queue stores parents waiting for left/right child assignment.
+# Complexity: O(n) time, O(n) space.
+# Interview line: consume the array in pairs while BFS assigns children.
 def build_tree_level(values: List[Optional[int]]) -> Optional[TreeNode]:
     if not values or values[0] is None:
         return None
@@ -39,24 +51,40 @@ def build_tree_level(values: List[Optional[int]]) -> Optional[TreeNode]:
     return root
 
 
+# Pattern: recursive preorder traversal.
+# Invariant: visit node before its left and right subtrees.
+# Complexity: O(n) time, O(h) recursion space.
+# Interview line: preorder is useful when parent work happens before children.
 def preorder_recursive(root: Optional[TreeNode]) -> List[int]:
     if not root:
         return []
     return [root.val] + preorder_recursive(root.left) + preorder_recursive(root.right)
 
 
+# Pattern: recursive inorder traversal.
+# Invariant: visit left subtree, then node, then right subtree.
+# Complexity: O(n) time, O(h) recursion space.
+# Interview line: inorder traversal of a BST yields sorted order.
 def inorder_recursive(root: Optional[TreeNode]) -> List[int]:
     if not root:
         return []
     return inorder_recursive(root.left) + [root.val] + inorder_recursive(root.right)
 
 
+# Pattern: recursive postorder traversal.
+# Invariant: visit both children before the node.
+# Complexity: O(n) time, O(h) recursion space.
+# Interview line: postorder is natural when a node depends on child results.
 def postorder_recursive(root: Optional[TreeNode]) -> List[int]:
     if not root:
         return []
     return postorder_recursive(root.left) + postorder_recursive(root.right) + [root.val]
 
 
+# Pattern: iterative inorder with explicit stack.
+# Invariant: stack stores ancestors whose left side has been explored.
+# Complexity: O(n) time, O(h) space.
+# Interview line: simulate recursion by walking left, popping, then walking right.
 def inorder_iterative(root: Optional[TreeNode]) -> List[int]:
     stack = []
     order = []
@@ -73,6 +101,10 @@ def inorder_iterative(root: Optional[TreeNode]) -> List[int]:
     return order
 
 
+# Pattern: BFS by levels.
+# Invariant: each outer loop iteration consumes exactly one tree level.
+# Complexity: O(n) time, O(width) space.
+# Interview line: use len(queue) to separate levels cleanly.
 def level_order(root: Optional[TreeNode]) -> List[List[int]]:
     if not root:
         return []

@@ -5,6 +5,10 @@ from typing import List
 Grid = List[List[int]]
 
 
+# Pattern: multi-source BFS from all zero cells.
+# Invariant: the first distance assigned to a cell is its nearest-zero distance.
+# Complexity: O(rows * cols) time, O(rows * cols) space.
+# Interview line: start from all sources at once instead of running BFS from every one cell.
 def update_matrix(mat: Grid) -> Grid:
     rows, cols = len(mat), len(mat[0])
     q = deque()
@@ -27,6 +31,10 @@ def update_matrix(mat: Grid) -> Grid:
     return mat
 
 
+# Pattern: multi-source BFS with elapsed time.
+# Invariant: queue spreads rot one minute at a time from all initially rotten oranges.
+# Complexity: O(rows * cols) time, O(rows * cols) space.
+# Interview line: count fresh oranges up front so the final answer is easy to validate.
 def oranges_rotting(grid: Grid) -> int:
     rows, cols = len(grid), len(grid[0])
     q = deque()

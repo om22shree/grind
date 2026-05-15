@@ -2,6 +2,10 @@ import heapq
 from typing import List
 
 
+# Pattern: sort by start and merge overlapping intervals.
+# Invariant: merged holds non-overlapping intervals covering everything processed.
+# Complexity: O(n log n) time, O(n) space for output.
+# Interview line: after sorting, only the last merged interval can overlap the next one.
 def merge_intervals(intervals: List[List[int]]) -> List[List[int]]:
     intervals.sort()
     merged = []
@@ -15,6 +19,10 @@ def merge_intervals(intervals: List[List[int]]) -> List[List[int]]:
     return merged
 
 
+# Pattern: three-phase interval insertion.
+# Invariant: append intervals before, merge overlaps, then append intervals after.
+# Complexity: O(n) time, O(n) space for output.
+# Interview line: because input is sorted, we only merge the contiguous overlap block.
 def insert_interval(intervals: List[List[int]], new_interval: List[int]) -> List[List[int]]:
     result = []
     i = 0
@@ -37,6 +45,10 @@ def insert_interval(intervals: List[List[int]], new_interval: List[int]) -> List
     return result
 
 
+# Pattern: greedy by earliest end time.
+# Invariant: keep the interval that leaves the most room for future intervals.
+# Complexity: O(n log n) time, O(1) extra space after sorting.
+# Interview line: when two intervals overlap, dropping the one with later end is optimal.
 def erase_overlap_intervals(intervals: List[List[int]]) -> int:
     intervals.sort(key=lambda x: x[1])
     removed = 0
@@ -51,11 +63,19 @@ def erase_overlap_intervals(intervals: List[List[int]]) -> int:
     return removed
 
 
+# Pattern: sorted adjacent overlap check.
+# Invariant: after sorting, any conflict must be between neighboring intervals.
+# Complexity: O(n log n) time, O(1) extra space after sorting.
+# Interview line: if every meeting starts after the previous ends, one person can attend all.
 def can_attend_meetings(intervals: List[List[int]]) -> bool:
     intervals.sort()
     return all(intervals[i][0] >= intervals[i - 1][1] for i in range(1, len(intervals)))
 
 
+# Pattern: sweep line with min-heap of meeting end times.
+# Invariant: heap contains end times for rooms currently in use.
+# Complexity: O(n log n) time, O(n) space.
+# Interview line: free the earliest-ending room before allocating a new one.
 def min_meeting_rooms(intervals: List[List[int]]) -> int:
     intervals.sort()
     rooms = []
@@ -68,6 +88,10 @@ def min_meeting_rooms(intervals: List[List[int]]) -> int:
     return len(rooms)
 
 
+# Pattern: two pointers over two sorted interval lists.
+# Invariant: advance the interval that ends first because it cannot overlap future intervals.
+# Complexity: O(m + n) time, O(1) extra space excluding output.
+# Interview line: intersection is max(starts) to min(ends), if that range is valid.
 def interval_intersection(first: List[List[int]], second: List[List[int]]) -> List[List[int]]:
     i = j = 0
     result = []

@@ -2,6 +2,10 @@ from collections import deque, defaultdict
 from typing import List
 
 
+# Pattern: BFS over wildcard word patterns.
+# Invariant: queue distance is the shortest transformation length to that word.
+# Complexity: O(N * L^2) time, O(N * L) space for N words of length L.
+# Interview line: wildcard buckets turn one-letter transformations into graph neighbors.
 def ladder_length(begin_word: str, end_word: str, word_list: List[str]) -> int:
     words = set(word_list)
     if end_word not in words:
